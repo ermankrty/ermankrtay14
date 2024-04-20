@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background-image: url('/images/channel.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #container {
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        #messages {
+        }
+
+        .userMessages {
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 16px;
+            resize: none;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .emoji-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Channel - <span th:text="${channel.name}"></span></title>
+</head>
+<body>
+    <div id="container">
+        <h2>Welcome to <span th:text="${channel.name}"></span> Channel!</h2>
+        
+        <div id="messages">
+        </div>
+        
+        <div class="userMessages">
+            <textarea rows="3" id="messageSpace" th:attr="data-id=${channel.channelId}" placeholder="Type your message here"></textarea>
+            <button class="emoji-btn" type="button" onclick="addEmoji('😊')">😊</button>
+            <button class="emoji-btn" type="button" onclick="addEmoji('😂')">😂</button>
+            <button class="emoji-btn" type="button" onclick="addEmoji('😡')">😡</button>
+            <button class="emoji-btn" type="button" onclick="addEmoji('😢')">😢</button>
+        </div>
+        
+        <a href="/welcome">Back to Home Page</a>
+    </div>
+    <script type="text/javascript" src="/js/channel.js"></script>
+    <script>
+        function addEmoji(emoji) {
+            var messageSpace = document.querySelector("#messageSpace");
+            messageSpace.value += emoji;
+            messageSpace.focus();
+        }
+    </script>
+</body>
+</html>
